@@ -58,6 +58,10 @@ def process(filepath: str):
         if sym.extends is None:
             fprint(f"  case class `{sym.entryName}`() extends Part {{")
 
+            for prop in sym.properties:
+                if prop.key == "Footprint" and prop.value != "":
+                    fprint(f'    this packageIn "{prop.value}"')
+
             for pinName, pinList in nameAndPos.items():
                 fprint(
                     f"    val `{pinName}` = Pin() @@ {' @@ '.join(map(autoQuote, pinList))}"

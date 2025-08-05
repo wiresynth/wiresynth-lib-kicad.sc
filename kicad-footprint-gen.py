@@ -45,7 +45,7 @@ def main():
 
         fprint(f"package wiresynth.lib.kicad.footprint\n\nobject {lib}:")
         for name in names:
-            fprint(f'  val {ident(name)} = "{name}"')
+            fprint(f'  val {ident(name)} = "{lib}:{name}"')
 
 
 if __name__ == "__main__":
