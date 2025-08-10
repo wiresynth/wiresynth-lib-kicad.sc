@@ -56,13 +56,22 @@ def process(filepath: str):
                 nameAndPos[pin.number] = [pin.number]
 
         if sym.extends is None:
-            fprint(f"  case class `{sym.entryName}`() extends Part {{")
+            footprint = None
 
             for prop in sym.properties:
                 if prop.key == "Footprint" and prop.value != "":
-                    fprint(f'    this packageIn "{prop.value}"')
+                    footprint = prop.value
+
+            if footprint is not None:
+                fprint(f"  /** Footprint: {footprint} */")
+
+            fprint(f"  case class `{sym.entryName}`() extends Part {{")
+
+            if footprint is not None:
+                fprint(f'    this packageIn "{footprint}"')
 
             for pinName, pinList in nameAndPos.items():
+                fprint(f"    /** Position: {' | '.join(pinList)} */")
                 fprint(
                     f"    val `{pinName}` = Pin() @@ {' @@ '.join(map(autoQuote, pinList))}"
                 )

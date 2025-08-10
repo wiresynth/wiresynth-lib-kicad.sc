@@ -34,4 +34,4 @@ jobs:
           SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
         run: |
           . ~/.sdkman/bin/sdkman-init.sh
-          JAVA_OPTS='-XX:+UseG1GC -Xss32M -Xmx4096M' sbt ci-release
+          JAVA_OPTS='-XX:+UseG1GC -Xss8M -Xmx14336M' sbt ci-release
