@@ -18,7 +18,7 @@ ThisBuild / developers := List(
   )
 )
 
-val coreVersion = "0.3.0"
+val coreVersion = "0.4.0"
 
 val root = (project in file("."))
   .settings(
